@@ -10,7 +10,7 @@ function drawGrid(width, height){
 
         for(let x = 0; x < width; x++)
         {
-            gridRow.appendChild(createGridCell(`${x}-${y}`));
+            gridRow.appendChild(createGridCell(`${y*width + x}`));
         }
 
         gridContainer.appendChild(gridRow);

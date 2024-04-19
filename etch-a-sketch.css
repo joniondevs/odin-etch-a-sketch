@@ -4,6 +4,19 @@ h1{
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+#button-container{
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 24px;
+    margin-bottom: 24px;
+}
+
+button{
+    width: 150px;
+    height: 32px;
+}
+
 #grid-container{
     display: flex;
     flex-direction: column;

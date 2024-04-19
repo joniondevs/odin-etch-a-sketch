@@ -33,13 +33,16 @@ function createGridRow()
 
 function createGridCell(cellName)
 {
+    let cellParent = document.createElement("div");
+    cellParent.classList.add("grid-cell-parent");
+    
     let cell = document.createElement("div");
     cell.id = "cell-"+cellName;
     cell.classList.add("grid-cell");
     cell.style.opacity = 0;
-    cell.textContent = cellName;
 
-    return cell;
+    cellParent.appendChild(cell);
+    return cellParent;
 }
 
 function colorCell(cellId)

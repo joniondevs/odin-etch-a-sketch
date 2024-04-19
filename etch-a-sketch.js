@@ -1,3 +1,6 @@
+let defaultGridSize = 16;
+let minGridSize = 8;
+let maxGridSize = 32;
 let gridSize = 16;
 let coloredCells = [];
 
@@ -6,7 +9,7 @@ const clearButton = document.querySelector("#clear");
 const newDrawpad = document.querySelector("#new-drawpad");
 
 subscribeToEvents();
-drawGrid(gridSize, gridSize);
+drawGrid(defaultGridSize, defaultGridSize);
 
 function subscribeToEvents()
 {
@@ -19,7 +22,13 @@ function subscribeToEvents()
 }
 
 function onNewDrawpadOnClick(){
-    console.log("New drawpad!");
+    let input = prompt(`Create new Drawpad (${minGridSize}-${maxGridSize})`, 16);
+    let inputValue = parseInt(input);
+    if(typeof inputValue == "number" && input >= minGridSize && input <= maxGridSize)
+    {
+        gridSize = inputValue;
+        drawGrid(gridSize, gridSize);
+    }
 }
 
 function onClearDrawpadOnClick(){

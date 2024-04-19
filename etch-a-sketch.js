@@ -23,12 +23,15 @@ function onNewDrawpadOnClick(){
 }
 
 function onClearDrawpadOnClick(){
-    console.log("Clearing drawpad");
+    drawGrid(gridSize, gridSize);
 }
 
 function drawGrid(width, height){
     if(typeof width != "number" || typeof height != "number"){ return "ERROR: Grid width and height must be numbers!"}
-    
+
+    console.log("creating new grid");
+    let grid = createGrid();
+
     for(let y = 0; y < height; y++){
         let gridRow = createGridRow();
 
@@ -36,9 +39,22 @@ function drawGrid(width, height){
         {
             gridRow.appendChild(createGridCell(`${y*width + x}`));
             coloredCells[y*width + x] = 0.0;
+            grid.appendChild(gridRow);
         }
-        gridContainer.appendChild(gridRow);
     }
+    gridContainer.appendChild(grid);
+}
+
+function createGrid(){
+    let grid = document.querySelector("#grid");
+    if(grid != null){
+        grid.remove();
+    }
+    grid = document.createElement("div");
+    grid.id = "grid";
+    coloredCells = [];
+
+    return grid;
 }
 
 function createGridRow()

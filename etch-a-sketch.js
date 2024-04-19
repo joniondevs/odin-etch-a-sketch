@@ -1,12 +1,30 @@
 let gridSize = 16;
 let coloredCells = [];
+
 const gridContainer = document.querySelector("#grid-container");
+const clearButton = document.querySelector("#clear");
+const newDrawpad = document.querySelector("#new-drawpad");
+
+subscribeToEvents();
 drawGrid(gridSize, gridSize);
 
-gridContainer.addEventListener("mouseover", (event)=>{
-    colorCell(event.target.id);
-});
+function subscribeToEvents()
+{
+    gridContainer.addEventListener("mouseover", (event)=>{
+        colorCell(event.target.id);
+    });
 
+    clearButton.addEventListener("click", onClearDrawpadOnClick);
+    newDrawpad.addEventListener("click", onNewDrawpadOnClick);
+}
+
+function onNewDrawpadOnClick(){
+    console.log("New drawpad!");
+}
+
+function onClearDrawpadOnClick(){
+    console.log("Clearing drawpad");
+}
 
 function drawGrid(width, height){
     if(typeof width != "number" || typeof height != "number"){ return "ERROR: Grid width and height must be numbers!"}

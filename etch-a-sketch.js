@@ -1,6 +1,8 @@
 let gridSize = 16;
+let coloredCells = [];
 const gridContainer = document.querySelector("#grid-container");
 drawGrid(gridSize, gridSize);
+
 gridContainer.addEventListener("mouseover", (event)=>{
     colorCell(event.target.id);
 });
@@ -15,8 +17,8 @@ function drawGrid(width, height){
         for(let x = 0; x < width; x++)
         {
             gridRow.appendChild(createGridCell(`${y*width + x}`));
+            coloredCells[y*width + x] = 0.0;
         }
-
         gridContainer.appendChild(gridRow);
     }
 }
@@ -34,6 +36,7 @@ function createGridCell(cellName)
     let cell = document.createElement("div");
     cell.id = "cell-"+cellName;
     cell.classList.add("grid-cell");
+    cell.style.opacity = 0;
     cell.textContent = cellName;
 
     return cell;
@@ -43,8 +46,25 @@ function colorCell(cellId)
 {
     if(cellId.includes("cell"))
     {
+        let cellIndex = parseInt(cellId.replace("cell-", ""));
         let cell = document.querySelector(`#${cellId}`);
-        cell.style.backgroundColor = "black";
+        let currentOpacity = coloredCells[cellIndex];
+        currentOpacity += 0.1;
+        coloredCells[cellIndex] = clampValue(currentOpacity, 0.0, 1.0);
+        cell.style.opacity = currentOpacity;
     }
+}
+
+function clampValue(value, min, max)
+{
+    if(value < min){
+        return min;
+    }
+
+    if(value > max){
+        return max;
+    }
+
+    return value;
 }
 
